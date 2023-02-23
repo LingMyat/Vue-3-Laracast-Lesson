@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,8 +8,18 @@
     <title>Vue3</title>
     <script src="https://unpkg.com/vue@3.2.47/dist/vue.global.js"></script>
 </head>
+<style>
+    .text-red {
+        color: red;
+    }
+
+    .text-green {
+        color: green;
+    }
+</style>
+
 <body>
-    
+
     <div id="app">
         <p>
             <input type="text" v-model="greeting">
@@ -16,22 +27,31 @@
         <p>
             {{ greeting }} ({{ greeting.length }})
         </p>
+        <button :class="active? 'text-red' : 'text-green'" @click="toggle">Click Me</button>
     </div>
 
     <script>
         Vue.createApp({
             data() {
                 return {
-                    greeting: 'Hello World'
+                    greeting: 'Hello World',
+                    btnClass: 'text-green',
+                    active: false
                 };
             },
 
             mounted() {
-                setTimeout(()=>{
+                setTimeout(() => {
                     this.greeting = 'Changed';
-                },3000)
+                }, 3000)
+            },
+            methods: {
+                toggle(){
+                    this.active = !this.active;
+                }
             },
         }).mount('#app')
     </script>
 </body>
+
 </html>
